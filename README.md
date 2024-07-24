@@ -1,51 +1,59 @@
+# Chess Game Using AI For 2-Agents
 
-# Chess AI
+This is a chess game developed using Python and Pygame. The game features an interactive graphical interface for playing chess against a computer opponent. The AI opponent uses the Minimax algorithm with alpha-beta pruning for decision-making.
+## Objective
+The objective of this project is to develop a fully functional chess game using Python and Pygame, featuring an AI opponent that utilizes the Minimax algorithm with alpha-beta pruning. The game aims to provide a seamless and interactive user experience, allowing players to enjoy a classic game of chess against a computer opponent. The project also serves as a learning tool for understanding game development concepts, artificial intelligence, and algorithm implementation. Through this project, we aim to:
 
-A fully implemented interactive Chess AI implemented using the MiniMax algorithm and Alpha-beta pruning for optimization. Full-fledged UI makes for a pleasant user experience. 
-
-
+  - Implement a visually appealing and user-friendly graphical interface for the chessboard and pieces.
+  - Develop an efficient and intelligent AI opponent capable of making strategic moves.
+  - Enhance programming skills in Python and Pygame.
+  - Gain a deeper understanding of game theory and the Minimax algorithm.
+  - Create a modular and well-documented codebase for future enhancements and contributions.
+   
 ## Demo
 
 
   ![Alt Text](https://media.giphy.com/media/hojJHfOF6Z8XvfHjl2/giphy.gif)
+## Technologies Used
+
+- Python
+- Pygame
+- python-chess
 ## Features
 
 - Color selection
 - Interactive UI using [pygame](https://www.pygame.org/)
 - Configure search depth
 - invalid move prevention 
-
+- Interactive chessboard with draggable pieces.
+- AI opponent using Minimax algorithm.
+- Options to choose player color (white or black).
+- Game over screen with options to play again or quit.
+- Displays possible moves for selected pieces.
+- Dynamic game evaluation for optimal moves.
   
 
-## Usage/Examples
+## Usage
 
-You can instantly run the demo: 
+### 1. Setting Up the Game
 
-- Download and unzip or clone this repository:
-    ```
-    git clone https://github.com/GerniVisser/Chess.git
-    cd Chess
-    ```
-- Install requirements
+- The game initializes with a main menu where you can choose to play as either white or black.
+- Select your color by clicking the "WHITE" or "BLACK" button. The game will start immediately after selection.
+### 2. Making Moves
 
-    Install newest verion of pygame used to display a visual UI ([pygame's website](https://www.pygame.org/))
-    . As well as the python-chess library to validate moves and board state ([python-chess's website](https://pypi.org/project/python-chess/))
-    ```
-    pip3 install -r requirements.txt 
-    ```
-- Run demo
-    ```
-    python3 main.py
-    ```
-  
+- Click on a piece to select it. Possible moves will be highlighted.
+- Click on a highlighted square to move the selected piece there.
+- Right-click to deselect a piece if you change your mind.
+### 3. AI Opponent
 
-  
+- After making your move, the AI opponent will calculate and make its move automatically.
+- The difficulty of the AI can be adjusted by changing the depth of the Minimax algorithm.
+### 4. Game Over
 
-## General
-
-This project was the result of a research endeavour into simulating intelligent decision making in chess. In the field of Game Theory a common approach to compute the best sequence of moves to maximize the odds of winning is to use the Minimax algorithm to minimize the possible loss for a worst case (maximum loss) scenario.
-
-### MiniMax
+- If a checkmate or stalemate occurs, the game over menu will appear.
+- You can choose to restart the game or quit.
+## Algorithms Used
+### 1. MiniMax
 
 Minimax is a kind of backtracking algorithm that is used in decision making and game theory to find the optimal move for a player, assuming that your opponent also plays optimally. It is widely used in two player turn-based games such as Chess or Tic-Tac-Toe
 In Minimax the two players are called maximizer and minimizer. The maximizer tries to get the highest score possible while the minimizer tries to do the opposite and get the lowest score possible.
@@ -53,7 +61,7 @@ Every board state has a value associated with it. In a given state if the maximi
 
 ![Alt Text](https://upload.wikimedia.org/wikipedia/commons/6/6f/Minimax.svg)
 
-### Evauation function
+### 2. Evauation function
 
 The evaluation function is used to assign a numerical value to a board state so that different board states that is a result of different sequence of moves could be compared by the MiniMax algorithm 
 
@@ -61,12 +69,48 @@ The evaluation function is used to assign a numerical value to a board state so 
 - Material
 - Piece development
 
-### Alpha-beta pruning
+### 3. Alpha-beta pruning
 This is an optimization algorithm that greatly reduces the number of board states that bahve to be evaluated by removing board states that are obviously undesireble
 
-## Lessons Learned
+## Files Description
+**1. Image directory :**
 
-The engine evaluates every possible move up to six moves into the future. All the board states after the six moves are analyzed to determine which one has the highest probability of winning. By utilizing the MiniMax algorithm, the engine can then calculate which moves to make. The assumption is that the opposing player would also be making the optimal moves to ensure his/her victory. I then added the Alpha-beta pruning algorithm that reduces the number of board states to evaluate by removing those that are obviously unfavorable.
-Evaluating any given board state is done with the use of an evaluation function. There are many ways to implement such a function, so my goal was to find one that balanced performance with accuracy. Performance is improved by reducing the number of parameters to process while accuracy is improved by increasing it. I set a 10 second limit to the processing time and then went on to find the most efficient evaluation function that I could. The one I finally came up with allowed the engine to evaluate 6 moves ahead.
+Contains all the images of the chess pieces.
 
-  
+**2. Board.py :** 
+
+In this file we create a class of chessBoard and initialize and declare a 2D array of gametiles with null pieces and then place all the chess pieces on the board on their respective starting positions.
+
+**3. Evaluation.py :** 
+
+In this we define some of the special cases in chess for example castling, en passant rule, check. functions are used to check whether the player is in check, return moves available in case the player is in check, return moves in case of castling and return moves available in case of enpassant rule. It creates a Tile class which is placed on a chessboard array. It can store a position number on the board and a chess piece object.
+
+**4. Pieces_Development_Values.py :** 
+
+Contains files in which every chess piece class is defined. Every chess piece class has alliance (indicating whether the piece is white or black) and position ( coordinates on the chessboard ) attributes. It also has a legal move method which is used to calculate the legal moves for that chess piece on the chessboard.
+
+**5. MiniMax.py :** 
+
+Contains the logic for the AI algorithm. The AI was implemented using a recursive Minimax algorithm with alpha beta pruning and with the depth search of 3. The evaluation function assigned each chess piece a value, White pieces were assigned a positive value based on their rank and black pieces were assigned negative values based on their rank as well. So the total value becomes 0 in the start of the game where each side has all the pieces. The algorithm tried to search all possible moves up to the depth of 3 and calculate which next move could allow it to have the best evaluation value.
+
+**6. main.py :** 
+
+Main file of the program which merges all the functionality from the other files and itself as well to implement all this on pygame GUI.
+
+## Future Work Possible
+
+### 1. Online Multiplayer Mode:
+
+  - Implement an online multiplayer mode allowing users to play against each other over the internet using technologies like WebSockets for real-time communication.
+### 2. Improved AI:
+
+  - Enhance the AI with advanced techniques such as neural networks or machine learning to make the AI more challenging and adaptable, and implement different difficulty levels.
+### 3. User Profiles and Statistics:
+
+  - Add user profiles to track player statistics, such as wins, losses, and draws, and implement an Elo rating system for players.
+### 4. Move Analysis and Hints:
+
+  - Provide move analysis and hints to help players improve their game and implement a feature to show the best move suggestions.
+### 5. Game Replay and Analysis:
+
+  - Enable players to save and replay their games, and offer tools to analyze completed games and identify mistakes.
